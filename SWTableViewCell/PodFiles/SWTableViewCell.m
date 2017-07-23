@@ -187,7 +187,6 @@ static NSString * const kTableViewPanState = @"state";
 
 - (void)dealloc
 {
-    _cellScrollView.delegate = nil;
     [self removeOldTableViewPanObserver];
 }
 
@@ -210,7 +209,7 @@ static NSString * const kTableViewPanState = @"state";
         
         _containingTableView.directionalLockEnabled = YES;
         
-        [self.tapGestureRecognizer requireGestureRecognizerToFail:_containingTableView.panGestureRecognizer];
+//        [self.tapGestureRecognizer requireGestureRecognizerToFail:_containingTableView.panGestureRecognizer];
         
         [_tableViewPanGestureRecognizer addObserver:self forKeyPath:kTableViewPanState options:0 context:nil];
     }
@@ -268,8 +267,8 @@ static NSString * const kTableViewPanState = @"state";
         
         self.rightUtilityButtonsView.utilityButtons = rightUtilityButtons;
 
-        [self.rightUtilityButtonsView layoutIfNeeded];
-        [self layoutIfNeeded];
+//        [self.rightUtilityButtonsView layoutIfNeeded];
+//        [self layoutIfNeeded];
     }
 }
 
@@ -279,8 +278,8 @@ static NSString * const kTableViewPanState = @"state";
     
     [self.rightUtilityButtonsView setUtilityButtons:rightUtilityButtons WithButtonWidth:width];
 
-    [self.rightUtilityButtonsView layoutIfNeeded];
-    [self layoutIfNeeded];
+//    [self.rightUtilityButtonsView layoutIfNeeded];
+//    [self layoutIfNeeded];
 }
 
 #pragma mark - UITableViewCell overrides
@@ -748,10 +747,6 @@ static NSString * const kTableViewPanState = @"state";
     }
     
     [self updateCellState];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(swipeableTableViewCell:didScroll:)]) {
-        [self.delegate swipeableTableViewCell:self didScroll:scrollView];
-    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
